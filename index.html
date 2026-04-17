@@ -1,24 +1,387 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<title>복싱 매치 참가 신청</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2026 강남구 복싱 챌린지</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b1020;
+      color: #f5f7fb;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(11,16,32,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: 1px;
+      font-size: 20px;
+    }
+
+    .menu {
+      display: flex;
+      gap: 20px;
+      font-size: 14px;
+      color: #d9dfeb;
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 20px;
+      background:
+        linear-gradient(rgba(5,8,18,0.55), rgba(5,8,18,0.82)),
+        url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: 56px;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    .hero-text p {
+      color: #d7dceb;
+      max-width: 650px;
+      font-size: 17px;
+      margin-bottom: 28px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: #f43f5e;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: white;
+    }
+
+    .apply-card {
+      background: rgba(17, 24, 39, 0.88);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    .apply-card h2 {
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+
+    .apply-card p {
+      color: #c8d0df;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 14px 15px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.06);
+      color: white;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #b9c3d6;
+    }
+
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 90px 20px;
+    }
+
+    .section-title {
+      font-size: 34px;
+      margin-bottom: 14px;
+    }
+
+    .section-desc {
+      color: #c9d2e2;
+      margin-bottom: 34px;
+      max-width: 760px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: #12192b;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      padding: 24px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .card p {
+      color: #cdd6e4;
+      font-size: 15px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline-item {
+      background: #12192b;
+      border-left: 4px solid #f43f5e;
+      padding: 20px;
+      border-radius: 14px;
+    }
+
+    .timeline-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 18px;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: #b7c1d6;
+      text-align: center;
+      padding: 24px 20px 50px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-text h1 {
+        font-size: 40px;
+      }
+
+      .menu {
+        display: none;
+      }
+    }
+  </style>
 </head>
+<body>
 
-<body style="font-family:sans-serif;text-align:center;margin-top:100px">
+  <header>
+    <div class="nav">
+      <div class="logo">BOXING MATCH</div>
+      <nav class="menu">
+        <a href="#about">대회 소개</a>
+        <a href="#schedule">일정</a>
+        <a href="#division">부문</a>
+        <a href="#contact">문의</a>
+      </nav>
+    </div>
+  </header>
 
-<h1>복싱 매치 참가 신청</h1>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-badge">2026.04.18 · Amateur Championship</div>
+        <h1>강한 마음이<br>링 위에서 증명되는 순간</h1>
+        <p>
+          전국 아마추어 복싱 참가자를 위한 오픈 매치.
+          체급별·연령별 부문 운영과 체계적인 현장 진행으로
+          더 몰입감 있는 대회 경험을 제공합니다.
+        </p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary">참가 문의</a>
+          <a href="#schedule" class="btn btn-secondary">일정 보기</a>
+        </div>
+      </div>
 
-<form onsubmit="prank(); return false;">
-<input type="text" placeholder="이름"><br><br>
-<input type="text" placeholder="전화번호"><br><br>
-<button type="submit">지원하기</button>
-</form>
+      <div class="apply-card" id="contact">
+        <h2>참가 신청</h2>
+        <p>아래 항목을 작성하면 참가 안내를 확인할 수 있어.</p>
+        <form onsubmit="submitForm(event)">
+          <div class="form-group">
+            <input type="text" placeholder="이름" required>
+          </div>
+          <div class="form-group">
+            <input type="tel" placeholder="연락처" required>
+          </div>
+          <div class="form-group">
+            <select required>
+              <option value="">참가 부문 선택</option>
+              <option>주니어</option>
+              <option>시니어 아마추어</option>
+              <option>마스터즈</option>
+              <option>여성부</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <textarea rows="4" placeholder="간단한 경력 또는 문의사항"></textarea>
+          </div>
+          <button class="btn btn-primary" style="width:100%; border:none; cursor:pointer;">
+            신청하기
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
 
-<script>
-function prank(){
- alert("앙기모띠ㅋㅋ");
-}
-</script>
+  <section class="section" id="about">
+    <h2 class="section-title">대회 소개</h2>
+    <p class="section-desc">
+      실력만 겨루는 자리가 아니라, 현장 분위기와 연출까지 살아 있는
+      공식 행사 느낌의 복싱 이벤트 페이지를 목표로 구성한 샘플이야.
+    </p>
 
+    <div class="grid-3">
+      <div class="card">
+        <h3>공식 행사 무드</h3>
+        <p>헤드라인, 일정, 부문 정보, 문의 섹션을 분리해서 실제 대회 사이트처럼 보이게 구성.</p>
+      </div>
+      <div class="card">
+        <h3>카드형 정보 정리</h3>
+        <p>내용이 길어도 훨씬 깔끔해 보이고, 모바일에서도 보기 편해.</p>
+      </div>
+      <div class="card">
+        <h3>신청 영역 강조</h3>
+        <p>오른쪽에 참가 신청 박스를 크게 두면 완성도가 확 올라가 보임.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="schedule">
+    <h2 class="section-title">대회 일정</h2>
+    <p class="section-desc">
+      시간표는 길게 표로 넣기보다 이런 타임라인 스타일로 보이면 훨씬 고급스럽게 보여.
+    </p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <strong>07:00 · 계체 시작</strong>
+        참가자 등록 및 체중 확인
+      </div>
+      <div class="timeline-item">
+        <strong>09:00 · 안전 브리핑</strong>
+        경기 규정 및 진행 방식 안내
+      </div>
+      <div class="timeline-item">
+        <strong>11:00 · 예선 경기</strong>
+        부문별 경기 시작
+      </div>
+      <div class="timeline-item">
+        <strong>16:00 · 결승 및 시상</strong>
+        최종 경기 종료 후 시상식 진행
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="division">
+    <h2 class="section-title">참가 부문</h2>
+    <p class="section-desc">
+      친구 사이트처럼 보이게 하려면 이런 식으로 부문을 나눠서 정보성 문구를 넣어주면 돼.
+    </p>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3>주니어</h3>
+        <p>만 15–17세 · 라이트플라이 ~ 웰터</p>
+      </div>
+      <div class="card">
+        <h3>시니어 아마추어</h3>
+        <p>만 18–34세 · 전 체급 운영</p>
+      </div>
+      <div class="card">
+        <h3>마스터즈 / 여성부</h3>
+        <p>세부 체급은 신청 인원에 따라 운영</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Boxing Match Landing Page Sample
+  </footer>
+
+  <script>
+    function submitForm(event) {
+      event.preventDefault();
+      alert("신청이 접수된 것처럼 보이지만, 이건 데모 페이지야 😄");
+    }
+  </script>
 </body>
 </html>
